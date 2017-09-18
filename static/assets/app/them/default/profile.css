@@ -1,0 +1,97 @@
+﻿body, html {
+    min-width: 1000px!important;
+    color: #646464;
+    height: 100%;
+    min-height: 100%;
+    font-family:"Microsoft Yahei";
+    font-size: 16px!important;
+
+}
+.border_right{ border-right: 1px solid #cacaca}
+.dis_none{ display: none}
+.table{ background: #fbfbfb;color: #646464;table-layout: fixed}
+.table-hover > tbody > tr:hover {
+    background-color: #afafaf;
+}
+.in_table_p{display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor: pointer; padding-right: 15px;}
+.table-td-hover > tbody > tr >td:hover {
+    background-color: #afafaf;
+}
+.row{ background: #fbfbfb;color: #333}
+.navbar-right{width: 300px !important;}
+label{ font-style: normal;font-weight: normal}
+.pagination a{ background: none!important; border:none !important; margin: 0px !important;}
+.pagination { margin: 0px !important;}
+a{transition: all .28s ease; color: #646464}
+a:hover{ opacity: 0.6; color: #333;transform: translateX(2px);}
+.table{margin-bottom: 0px !important;}
+table td{ padding-right: 15px !important;}
+.form-control{ border-radius: 5px !important;}
+.P_input{ padding: 5px; background: #ebebeb; border: 1px solid #e0e0e0; height: 26px; position: relative; color: #333; width: 100% !important; float: right}
+.blur2{ position: absolute; right: 25px !important; top:33px !important;}
+.Pr0_H{ background: #e0e0e0; display: block; padding: 0px 25px; height: 40px; margin: 1px !important; line-height: 40px;}
+.Pr0_H .navbar-right {position: relative; top:-9px;}
+.Pr0_H .navbar-right button{ background: none; position: absolute; top:12px; right:15px;}
+/*输入弹出*/
+.blur_focus{ width: 270px; height: 132px;  position: absolute;top:27px; z-index: 20; overflow-y: auto}
+.blur_focus li{ width: 100%; float: left; padding:3px 0 ;  float: left; font-size: 12px;line-height: 40px; background: #ededed }
+.blur_focus li:nth-of-type(odd){ background: #f4f4f4}
+.blur_focus li a{ float: left; margin-left: 10px;}
+.blur_focus li i{ float: right; margin-right: 10px; }
+.blur_focus li i img{ width: 40px; height: 40px; float: left; background: #cfcfcf}
+.Pr_img img{ width:100px; height: 100px; margin: 0 auto;}
+/*tab*/
+.tab_profil .tab_profil_nav{ width: 100%; background: #e0e0e0; display: block ;  float: left }
+.tab_profil .tab_profil_nav>a{ font-size: 0.85em; background: #bdbdbd; padding: 11px 40px;float: left; margin-right:1px}
+.tab_profil .tab_profil_nav>a.tabActive{ background: #636187; color: #fff;border-top: 2px solid #00ffc0 }
+.tab_profil .tab_profil_nav>a.tabActive i{ color: #0bffd8}
+.tab_profil .tab_pro_content{ padding-top:15px; float: left; width: 99%; background: #fbfbfb }
+.tab_profil .tab_profil_nav .icon-fullscreen{ font-size: 2em; margin-top: 5px; padding-right: 20px; cursor:pointer;  color: #333}
+/*tab end*/
+.contact_list { padding-left: 30px; width: 100%;  color: #646464}
+.padd-l{ padding-left: 0 !important;}
+.contact_list li{ float: left; width: 100%; font-style: normal}
+.contact_list i{ padding:  0 2px;}
+.contact_list_bj{ background: #ebebeb}
+.contact_panel{ width: 100%;float: left;}
+.contact_panel li{ width: 20%; float: left;background: #ccc; display: flex; justify-content: center; position: relative}
+.contact_panel li:nth-child(odd){ width: 20%; float: left;background: #dadada; display: flex; justify-content: center;}
+.contact_panel span{ width: 50%; float: left; height: 100px; color:#333;}
+.contact_panel input[type='checkbox']{ position: absolute; bottom:0px;right:3%;}
+.contact_panel span { display: flex; justify-content: center;align-items: center}
+.contact_panel a{background: #ebebeb}
+.contact_panel a img{ float: left; width: 100%; }
+.contact_left_w{width: 30px; height: auto;  background: #6e6ed0; font-size: 1.3em; text-align: center;right:10px;z-index: 10;}
+.contact_tip{ width: 30px; height: auto;  background: #ccc; text-align: center;left:0;z-index: 10;}
+.contact_tip a ,.contact_left_w a{ height: 30px; width: 30px;display: flex;align-items:center; justify-content:center;border-bottom: 1px solid #ccc; color: #fff}
+.contact_tip a.tabActive ,.contact_left_w a.tabActive{ background: #636187}
+.toggle_mark{ width: 450px;padding-left: 7%; float: left; background: #ccc; border-radius: 20px; line-height: 35px; font-size: 0.75em;}
+.I_tooltip{ width: 35px; height: 35px; position: absolute;left:1px; border-radius: 50%; background: #636187;float: left; color: #fff; font-size: 1.8em; text-align: center;  box-shadow: 3px 2px 2px #6863c4; margin-right: 20px;}
+.toggle_mark  a{ padding: 0 10px; border-left:1px solid #b5b5b5;}
+.page_block{ float: right; text-align: center; width: 55%;}
+.pagination  a{ color: #333 !important;}
+.person_table_show{ text-align: center;}
+.person_table_show .peson_img img{ width: 40px; height:40px; float: left; margin-right: 10px; }
+.person_table_show input{ float: right}
+.Pr_tab_list {  width: 100%;counter-reset:section; counter-reset:section ;}
+.Pr_tab_list li{ width: 100%; padding: 6px 10px; float: left;  counter-increment:subsection ;color: #555}
+.Pr_tab_list li i{ margin: 0 10px; color: #646464;}
+.Pr_tab_list_a a{ color: #e69e05; text-decoration: underline; margin: 0 10px;  }
+.Pr_tab_list li:before {  content:counter(section) "." ;counter-increment:section;    display:inline-block;  transition: all .28s ease; }
+.Pr_tab_list li:hover:before{transform: translateX(2d);}
+.Pr_tab_list li:nth-of-type(odd) ,.Pr_tab_list2 li:nth-of-type(odd){ background: #ccc}
+.tab_profil_screen{height: 100%; width: 100%;}
+
+.in_table_p2{display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor: pointer; padding-right: 15px; }
+.table_text_show{color:#646464; background: #ebebeb; padding: 15px; margin-top: 20px; }
+.icon-search_board{right:50px; background: none; top:5px;font-size: 1.5em; color: #333}
+.xingwei li{line-height: 24px; float: left  ; padding:5px 10px;width: 100%; color: #fff; background: #706e9c }
+.xingwei li a{ color:#fff}
+.xingwei li:nth-of-type(odd){ background: #7471aa}
+.xingwei{ position: absolute; width: 30%; top:45px; left:30%;}
+.tip_lable{ width: 100%; margin-bottom: 10px; float: left; border-bottom: 1px solid #eee}
+.tip_lable a{ padding: 5px 20px; background: #0aa28a; color: #fff; font-size: 0.75em;  border-radius: 5px; border: 1px solid #eee; margin: 5px 10px; float: left}
+
+
+
+

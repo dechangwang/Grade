@@ -1,0 +1,51 @@
+h5{ background: #dedede; padding: 12px; font-size: 16px;}
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: 30px;
+    padding: 2px 12px;
+    font-size: 12px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #eee;
+    background-image: none;
+    border: 1px solid #4e4b79;
+    border-radius: 0px;
+}
+.asside_border{ border-left:1px dashed #e3e3e3;}
+div{ color: #646464;}
+aside{ padding-left: 10px;font-size: 0.75em;}
+.sideR_aside{ height: 370px; overflow-y: auto}
+label{ font-size: 0.75em;font-weight: normal}
+.from_shuxing label{ line-height: 30px;}
+.input-text{ padding-top: 2px; height: 28px; line-height: 28px; border: 1px solid #ccc; margin-top: 8px;}
+.bj_odd_color{ height: 90px; overflow-y: auto}
+.bj_odd_color li{ float: left; width: 100%; height: 40px;  }
+.bj_odd_color li:nth-of-type(even){ background: #f8f8f8; float: left; width: 100%; height: 40px;  }
+.analyse_block{ width: 100%; float: left; padding:15px 15px 0 15px;}
+.analyse_block .analyes_nav{ background: #dadada; }
+.analyse_block .analyes_nav ,.analyse_block .analyes_content{width: 100%; float: left}
+.analyse_block .analyes_nav a{  padding: 10px 20px; float: left }
+.analyse_block .analyes_nav a.tabActive{ background: #636187; color: #fff}
+.analyse_block .analyes_content .analyes_ul{ padding-left: 0px;}
+
+
+.analyse_block1{ width: 100%; float: left; padding:1px 0px 0 0px; }
+.analyse_block1 .analyes_nav1{ background: #ebebeb; margin-bottom: 1px}
+.analyse_block1 .analyes_nav1 ,.analyse_block .analyes_content{width: 100%; float: left}
+.analyse_block1 .analyes_nav1 a{  padding: 5px 20px; float: left; font-size: 0.875em }
+.analyse_block1 .analyes_nav1 a.tabActive{ background: #b2afe9; color: #fff}
+.analyse_block1 .analyes_content1 .analyes_ul1{ padding-left: 0px;}
+
+.widt30_block{ width: 32.6333%;  border-radius: 5px; border: 1px solid #eee; height: 300px; background: #0a087b; margin:  15px  1% 0 0;float: left; }
+.board_none li div:last-of-type{ margin-right: 0px}
+.widt50_block{ border-radius: 5px; border: 1px solid #d5d5d5; width: 49%; margin-right: 1%; float: left; margin-top: 15px; height: 500px;}
+.shaixuan { position: absolute; bottom: 80px;right: 20px;}
+.shaixuan a{ border-radius: 50%; background: #0aa28a; color: #fff;  font-size: 14px; margin-bottom: 15px; z-index: 5; width: 35px; height: 35px; display: block; text-align: center; line-height: 35px;}
+.next_button a{ margin: 0 0.5%;}

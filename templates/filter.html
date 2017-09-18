@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myScreen">
+<head>
+  <meta charset="UTF-8">
+  <title>人员筛选</title>
+</head>
+<script src="{{url_for('static',filename='assets/javascripts/jquery-1.9.0.min.js')}}" type=text/javascript></script>
+<script src="{{url_for('static',filename='assets/bower_components/jstree/dist/jstree.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/javascripts/bootstrap.js')}}" language="javascript" ></script>
+<script src="{{url_for('static',filename='assets/javascripts/object.js')}}" type=text/javascript></script>
+<script src="{{url_for('static',filename='assets/javascripts/person_filter.js')}}" type=text/javascript></script>
+<!--css-->
+<!--<link rel="stylesheet" href="assets/app/css/jstree.css">-->
+<!--引入eachat的文件-->
+<script SRC="{{url_for}}"></script>
+<link rel="stylesheet" href="{{url_for('static',filename='assets/app/them/default/person_filter.css')}}"><!--其它css用@import在此css中引入了-->
+<link rel="stylesheet" href="{{url_for('static',filename='assets/bower_components/jstree/dist/themes/default/style.min.css')}}" />
+<body ng-controller="basicsCtrl">
+<div class="warp_content">
+  <dl>
+    <dt>
+      <a><img src="assets/images/logo02.png"></a>
+             <span>
+                  <a href="search.html" class=" " title="搜索" target="_blank">
+                    <i class="icon-youtube_searched_for  "></i>
+                    <em>搜索</em>
+                  </a>
+                <a class="tabActive" title="人员筛选" target="_blank">
+                  <i class="icon-icon_filter"></i>
+                  <em>人员筛选</em>
+                </a>
+                      <a  title="人员画像" target="_blank">
+                        <i class="icon-person  "></i>
+                        <em>人员画像</em>
+                      </a>
+                    <a id="toPageMap" href="relation2.html" title="关系图谱" target="_blank">
+                      <i class="icon-untitled54 "></i>
+                      <em>关系图谱</em>
+                    </a>
+                     <a title="人员矩阵" target="_blank" href="matrix2.html">
+                       <i class=" icon-untitled47   "></i>
+                       <em>人员矩阵</em>
+                     </a>
+                     <a title="设置" class="setup">
+                       <i class=" icon-cog   "></i>
+                       <em>设置</em>
+                     </a>
+                </span>
+    </dt>
+   <dd>
+     <i class="navSide_toggle2 icon-triangle-right icon-triangle-left"></i>
+     <div class="row F_warpper ">
+       <!--左侧目录下拉-->
+          <aside class="col-md-3">
+            <p class="left_caption">犯罪类型列表管理 <a class=" icon-cog font15 mar_l_20"></a></p>
+            <div class="left_tree">
+              <div id="jstreeAllCase" ></div>
+            </div>
+            <button class="btn-primary btn left_button">分析 </button>
+          </aside>
+          <section class="col-md-9 left_border pos_r">
+            <p class="right_caption gray_bj ">
+              <i class="fl_l">盗窃案--入室盗窃-福建省漳州市</i>
+              <span class="fl_r">
+                    <span id="uploadImg">
+            <input type="file" id="file" size="1" >
+            <a class=" icon-untitled50" >添加批次</a>
+       </span>
+                <a class=" icon-untitled35" id="screen"> 筛选导入</a>
+                <a class=" icon-icon_subject-info" data-toggle="modal" data-target="#myModa2">手动添加人员</a>
+                <div class="modal fade" id="myModa2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content" id="moadl_1">
+                      <div class="modal-header blue_bj">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h5 class="modal-title" id="shou_d">手动添加人员</h5>
+                      </div>
+                      <div class="modal-body">
+                        <form class="form-horizontal">
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">性名</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control width_80" class="name_1">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">身份证</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control width_80" class="shen_fen">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">性别</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control width_80" class="Gender">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">手机号码</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control width_80" class="phone">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">现住地</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control width_80" class="place">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">籍贯地</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control width_80" class="origin">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label">选择位置</label>
+                            <div class="col-sm-10">
+                              <select class="form-control width_80" class="position">
+                                <option>a</option>
+                                <option>c</option>
+                                <option>d</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-10">
+                            <label class="checkbox-inline">
+                              <input type="checkbox" id="inlineCheckbox1" value="option1">重点库
+                            </label>
+                            <label class="checkbox-inline">
+                              <input type="checkbox" id="inlineCheckbox1" value="option1"> 入重点库及侦察库
+                            </label>
+                              </div>
+                          </div>
+                          </form>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" ng-click="add_show()">保存</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </span>
+            </p>
+      <!--右侧-->
+            <!--基础库-->
+             <div class="col-md-12 right_shop">
+                <span class="right_shop_number"><i>基础库</i><a data-toggle="modal" data-target="#myModa3">0人</a></span>
+               <div class="modal fade " id="myModa3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                 <div class="modal-dialog" role="document">
+                   <div class="modal-content  width_100" id="model_1">
+                     <div class="modal-header blue_bj">
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                       <h4 class="modal-title" id="myModalLabel"></h4>
+                     </div>
+                     <div class="modal-body">
+                       <div class="tlite gray_bj">
+                         <span class="width_20 fl_l"><i class="icon-icon_direction">导出文件</i></span>
+                         <span class="width_80 fl_l text-center font15">筛选人员模型列表</span>
+                       </div>
+                       <div>
+                         <table class="table table-bordered white_bj text-center ">
+                           <tr>
+                             <td  width="5%">序号</td>
+                             <td width="3%"> <input type="checkbox"></td>
+                             <td width="8%">姓名</td>
+                             <td width="8%">详情</td>
+                             <td width="11%">身份证</td>
+                             <td width="5%">性别</td>
+                             <td width="8%">库位</td>
+                             <td width="10%">标签</td>
+                             <td width="10%">二级标签</td>
+                             <td width="7%">是否研判</td>
+                             <td width="10%">研判结论</td>
+                             <td width="8%">是否抓获</td>
+                             <td width="10%">星档</td>
+                           </tr>
+                           <tr>
+                             <td>1</td>
+                             <td><input type="checkbox"></td>
+                             <td>张三</td>
+                             <td><a class=" icon-icon_profile-male3" tlite="关系图谱"></a> <a class=" icon-_file65" tlite="人员画像"></a> </td>
+                             <td>234235235</td>
+                             <td>女</td>
+                             <td>重点库</td>
+                             <td>xxx</td>
+                             <td>xxx</td>
+                             <td>否</td>
+                             <td>团伙作案</td>
+                             <td>是</td>
+                             <td><span> <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></td>
+                           </tr>
+                           <tr>
+                             <td>1</td>
+                             <td><input type="checkbox"></td>
+                             <td>张三</td>
+                             <td><a class=" icon-icon_profile-male3" tlite="关系图谱"></a> <a class=" icon-_file65" tlite="人员画像"></a> </td>
+                             <td>234235235</td>
+                             <td>女</td>
+                             <td>重点库</td>
+                             <td>xxx</td>
+                             <td>xxx</td>
+                             <td>否</td>
+                             <td>团伙作案</td>
+                             <td>是</td>
+                             <td><span> <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></td>
+                           </tr>
+                           <tr>
+                             <td>1</td>
+                             <td><input type="checkbox"></td>
+                             <td>张三</td>
+                             <td><a class=" icon-icon_profile-male3" tlite="关系图谱"></a> <a class=" icon-_file65" tlite="人员画像"></a> </td>
+                             <td>234235235</td>
+                             <td>女</td>
+                             <td>重点库</td>
+                             <td>xxx</td>
+                             <td>xxx</td>
+                             <td>否</td>
+                             <td>团伙作案</td>
+                             <td>是</td>
+                             <td><span> <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></td>
+                           </tr>
+                           <tr>
+                             <td>1</td>
+                             <td><input type="checkbox"></td>
+                             <td>张三</td>
+                             <td><a class=" icon-icon_profile-male3" tlite="关系图谱"></a> <a class=" icon-_file65" tlite="人员画像"></a> </td>
+                             <td>234235235</td>
+                             <td>女</td>
+                             <td>重点库</td>
+                             <td>xxx</td>
+                             <td>xxx</td>
+                             <td>否</td>
+                             <td>团伙作案</td>
+                             <td>是</td>
+                             <td><span> <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></td>
+                           </tr>
+                           <tr>
+                             <td>1</td>
+                             <td><input type="checkbox"></td>
+                             <td>张三</td>
+                             <td><a class=" icon-icon_profile-male3" tlite="关系图谱"></a> <a class=" icon-_file65" tlite="人员画像"></a> </td>
+                             <td>234235235</td>
+                             <td>女</td>
+                             <td>重点库</td>
+                             <td>xxx</td>
+                             <td>xxx</td>
+                             <td>否</td>
+                             <td>团伙作案</td>
+                             <td>是</td>
+                             <td><span> <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></td>
+                           </tr>
+                           <tr>
+                             <td>1</td>
+                             <td><input type="checkbox"></td>
+                             <td>张三</td>
+                             <td><a class=" icon-icon_profile-male3" tlite="关系图谱"></a> <a class=" icon-_file65" tlite="人员画像"></a> </td>
+                             <td>234235235</td>
+                             <td>女</td>
+                             <td>重点库</td>
+                             <td>xxx</td>
+                             <td>xxx</td>
+                             <td>否</td>
+                             <td>团伙作案</td>
+                             <td>是</td>
+                             <td><span> <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></td>
+                           </tr>
+                           <tr>
+                             <td>1</td>
+                             <td><input type="checkbox"></td>
+                             <td>张三</td>
+                             <td><a class=" icon-icon_profile-male3" tlite="关系图谱"></a> <a class=" icon-_file65" tlite="人员画像"></a> </td>
+                             <td>234235235</td>
+                             <td>女</td>
+                             <td>重点库</td>
+                             <td>xxx</td>
+                             <td>xxx</td>
+                             <td>否</td>
+                             <td>团伙作案</td>
+                             <td>是</td>
+                             <td><span> <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></td>
+                           </tr>
+                           <tr>
+                             <td>1</td>
+                             <td><input type="checkbox"></td>
+                             <td>张三</td>
+                             <td><a class=" icon-icon_profile-male3" tlite="关系图谱"></a> <a class=" icon-_file65" tlite="人员画像"></a> </td>
+                             <td>234235235</td>
+                             <td>女</td>
+                             <td>重点库</td>
+                             <td>xxx</td>
+                             <td>xxx</td>
+                             <td>否</td>
+                             <td>团伙作案</td>
+                             <td>是</td>
+                             <td><span> <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></td>
+                           </tr>
+                           <tr>
+                             <td>1</td>
+                             <td><input type="checkbox"></td>
+                             <td>张三</td>
+                             <td><a class=" icon-icon_profile-male3" tlite="关系图谱"></a> <a class=" icon-_file65" tlite="人员画像"></a> </td>
+                             <td>234235235</td>
+                             <td>女</td>
+                             <td>重点库</td>
+                             <td>xxx</td>
+                             <td>xxx</td>
+                             <td>否</td>
+                             <td>团伙作案</td>
+                             <td>是</td>
+                             <td><span> <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></td>
+                           </tr>
+                           <tr>
+                             <td>1</td>
+                             <td><input type="checkbox"></td>
+                             <td>张三</td>
+                             <td><a class=" icon-icon_profile-male3" tlite="关系图谱"></a> <a class=" icon-_file65" tlite="人员画像"></a> </td>
+                             <td>234235235</td>
+                             <td>女</td>
+                             <td>重点库</td>
+                             <td>xxx</td>
+                             <td>xxx</td>
+                             <td>否</td>
+                             <td>团伙作案</td>
+                             <td>是</td>
+                             <td><span> <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></td>
+                           </tr>
+                           <tr>
+                             <td>1</td>
+                             <td><input type="checkbox"></td>
+                             <td>张三</td>
+                             <td><a class=" icon-icon_profile-male3" tlite="关系图谱"></a> <a class=" icon-_file65" tlite="人员画像"></a> </td>
+                             <td>234235235</td>
+                             <td>女</td>
+                             <td>重点库</td>
+                             <td>xxx</td>
+                             <td>xxx</td>
+                             <td>否</td>
+                             <td>团伙作案</td>
+                             <td>是</td>
+                             <td><span> <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></td>
+                           </tr>
+                           <tr>
+                             <td>1</td>
+                             <td><input type="checkbox"></td>
+                             <td>张三</td>
+                             <td><a class=" icon-icon_profile-male3" tlite="关系图谱"></a> <a class=" icon-_file65" tlite="人员画像"></a> </td>
+                             <td>234235235</td>
+                             <td>女</td>
+                             <td>重点库</td>
+                             <td>xxx</td>
+                             <td>xxx</td>
+                             <td>否</td>
+                             <td>团伙作案</td>
+                             <td>是</td>
+                             <td><span> <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></td>
+                           </tr>
+                           <tr>
+                             <td>1</td>
+                             <td><input type="checkbox"></td>
+                             <td>张三</td>
+                             <td><a class=" icon-icon_profile-male3" tlite="关系图谱"></a> <a class=" icon-_file65" tlite="人员画像"></a> </td>
+                             <td>234235235</td>
+                             <td>女</td>
+                             <td>重点库</td>
+                             <td>xxx</td>
+                             <td>xxx</td>
+                             <td>否</td>
+                             <td>团伙作案</td>
+                             <td>是</td>
+                             <td><span> <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></td>
+                           </tr>
+                           <tr>
+                             <td>1</td>
+                             <td><input type="checkbox"></td>
+                             <td>张三</td>
+                             <td><a class=" icon-icon_profile-male3" tlite="关系图谱"></a> <a class=" icon-_file65" tlite="人员画像"></a> </td>
+                             <td>234235235</td>
+                             <td>女</td>
+                             <td>重点库</td>
+                             <td>xxx</td>
+                             <td>xxx</td>
+                             <td>否</td>
+                             <td>团伙作案</td>
+                             <td>是</td>
+                             <td><span> <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></td>
+                           </tr>
+                           <tr>
+                             <td>1</td>
+                             <td><input type="checkbox"></td>
+                             <td>张三</td>
+                             <td><a class=" icon-icon_profile-male3" tlite="关系图谱"></a> <a class=" icon-_file65" tlite="人员画像"></a> </td>
+                             <td>234235235</td>
+                             <td>女</td>
+                             <td>重点库</td>
+                             <td>xxx</td>
+                             <td>xxx</td>
+                             <td>否</td>
+                             <td>团伙作案</td>
+                             <td>是</td>
+                             <td><span> <i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></td>
+                           </tr>
+                         </table>
+
+                       </div>
+                     </div>
+                     <div class="modal-footer">
+                       <button type="button" class="btn btn-default fl_l">称除选 择人员</button>
+                       <button type="button" class="btn btn-default">加入重点库</button>
+                       <button type="button" class="btn btn-primary">加入重点库及侦察库</button>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+                <div  class="right_shop_infor" >
+                  <span class="title">基础库分析</span>
+                  <div class="right_shop_block  col-md-12">
+                    <!--批次-->
+                    <ul id='pichi' class=" number_times clearfix" >
+                      <!--<li>
+                        <div class="checkbox">
+                          <input type="checkbox" class="che">
+                         <a  contentEditable="true" class="b_first1">A批次</a>
+                        </div>
+                        <a class="a_first">1322人</a>
+                      </li>
+                      <li>
+                        <div class="checkbox">
+                          <input type="checkbox" class="che">
+                          <a  contentEditable="true" class="b_second">B批次</a>
+                        </div>
+                        <a class="b_first">1223</a>
+                      </li>
+                      <li>
+                        <div class="checkbox">
+                          <input type="checkbox" class="che">
+                          <a  contentEditable="true" class="b_tird">C批次</a>
+                        </div>
+                        <a class="c_first">1322人</a>
+                      </li>-->
+                    </ul>
+                    <!--进度条-->
+                    <ul class="right_shop_progress clearfix" id='pichi1'>
+                      <!--<li class="l1"> <i class="fl_l">A 批次</i>
+                        <div class="progress fl_r width_90">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                            1244
+                          </div>
+                        </div>
+                      </li>
+                      <li class="l1"> <i class="fl_l">B 批次</i>
+                      <div class="progress fl_r width_90">
+                        <div class="progress-bar"   aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                          1244
+                        </div>
+                      </div>
+                    </li>
+                      <li class="l1"> <i class="fl_l">C 批次</i>
+                        <div class="progress fl_r width_90">
+                          <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                            1244
+                          </div>
+                        </div>
+                      </li>-->
+
+                    </ul>
+                    <ul class="right_shop_progress clearfix none " id="pichi2">
+                      <li> <i class="fl_l">去重统计</i>
+                        <div class="progress fl_r width_90">
+                          <div class="progress-bar" id="quChong" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+                            1244
+                          </div>
+                        </div>
+                      </li>
+                      <li> <i class="fl_l">重复统计</i>
+                        <div class="progress fl_r width_90">
+                          <div class="progress-bar" id="Chongf" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
+                            1244
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+
+                  </div>
+
+                </div>
+             </div>
+            <!--添加条件-->
+            <div class="col-md-12  right_shop_exit">
+              <span class="right_shop_number"><i></i><i></i></span>
+              <div  class="right_shop_infor">
+                <span class="filter_icon display_none" style="display:inline"> <i class="icon-fullscreen font15"></i>筛查添加重点人员</span>
+                  <div class="toggle_block" style="display:none" id="screen_1">
+                    <span class="title"> <a class=" icon-fullscreen_exit font15"></a>筛查添加重点人员</span>
+                    <div class="right_shop_block  col-md-12">
+                        <div class="add_trem">
+                          <div class="mar-bottom20">
+                            <a class=" icon-icon_zoom-in width_20 fl_l">添加条件</a>
+                            <span class="width_50  fl_l text-center" id="pi_other"> A批次不同条件筛选</span>
+                            <div class="dropdown width_20 fl_r">
+                              <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="icon-icon_advanced">
+                                筛选模型列表
+                              </a>
+                              <ul class="dropdown-menu" aria-labelledby="dLabel">
+                                <li> <span class="width_60 "><a class="fl_l">xxxx模型</a><a class="red width_30 fl_r">234</a> </span> </li>
+                                <li> <span class="width_60 "><a class="fl_l">xxxx模型</a><a class="red width_30 fl_r">234</a> </span> </li>
+                                <li> <span class="width_60 "><a class="fl_l">xxxx模型</a><a class="red width_30 fl_r">234</a> </span> </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      <ul class="right_shop_progress clearfix   ">
+                        <li>
+                          <span class="fl_l add_term "><i class=" icon-icon_cancel"></i><input type="checkbox"> <i>一组人员</i></span>
+                          <div class="progress fl_r width_85">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                              1244
+                            </div>
+                          </div>
+                          <span class="width100 fl_l padd_l_20" data-toggle="moda5" data-target="#myModa5">
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#myModal">条件一</button>
+                          </span>
+                          <!-- Modal -->
+                          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content" id="lie_biao">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                  <h5 class="modal-title blue_bj" id="myModalLabel">列表条件</h5>
+                                </div>
+                                <div class="modal-body">
+                                  <form class="form-horizontal">
+                                    <div class="form-group">
+                                      <label class="col-sm-2 control-label">年龄</label>
+                                      <div class="col-sm-10">
+                                        <input type="text" class="form-control width_40 fl_l" placeholder="最小值">
+                                        <span class="fl_l">---</span>
+                                        <input type="text" class="form-control width_40 fl_l" placeholder="最大值">
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="inputPassword" class="col-sm-2 control-label">  性别</label>
+                                      <div class="col-sm-10">
+                                        <select class="form-control">
+                                          <option>男</option>
+                                          <option>女</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="inputPassword" class="col-sm-2 control-label">  身高范围</label>
+                                      <div class="col-sm-10">
+                                        <select class="form-control width_60 fl_l">
+                                          <option>160cm</option>
+                                          <option>奔弛</option>
+                                        </select>
+
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="inputPassword" class="col-sm-2 control-label"> 籍贯地</label>
+                                      <div class="col-sm-10">
+                                        <input class="form-control">
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="inputPassword" class="col-sm-2 control-label">现住地</label>
+                                      <div class="col-sm-10">
+                                        <input class="form-control">
+                                      </div>
+                                    </div>
+                                    <div class="form-group c_f">
+                                      <ul class="cf_u">
+                                        <li>
+                                          <label for="inputPassword" class="col-sm-2 control-label">
+                                            车辆</label>
+                                          <div class="col-sm-10 mar_b_10">
+                                            <select class="form-control width_60 fl_l">
+                                              <option>宝马</option>
+                                              <option>奔弛</option>
+                                            </select>
+                                            <div class="form-group sele_bj fl_l">
+                                              <div class="sele_wapper">
+                                                <label for="inputPassword" class="col-sm-2 control-label">资金账号</label>
+                                                <div class="col-sm-10">
+                                                  <input class="form-control width_60 fl_l">
+                                                </div>
+                                              </div>
+                                              <div class="sele_wapper">
+                                                <label for="inputPassword" class="col-sm-2 control-label">资金交易时间</label>
+                                                <div class="col-sm-10">
+                                                  <select class="form-control width_40 fl_l">
+                                                    <option>宝马</option>
+                                                    <option>奔弛</option>
+                                                  </select>
+                                                  <span class="fl_l">---</span>
+                                                  <select class="form-control width_40 fl_l">
+                                                    <option>宝马</option>
+                                                    <option>奔弛</option>
+                                                  </select>
+                                                </div>
+                                              </div>
+                                              <div class="sele_wapper">
+                                                <label for="inputPassword" class="col-sm-2 control-label">交易次数</label>
+                                                <div class="col-sm-10">
+                                                  <select class="form-control width_40 fl_l">
+                                                    <option>宝马</option>
+                                                    <option>奔弛</option>
+                                                  </select>
+                                                  <span class="fl_l">---</span>
+                                                  <select class="form-control width_40 fl_l">
+                                                    <option>宝马</option>
+                                                    <option>奔弛</option>
+                                                  </select>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                    <div class="form-group c_f">
+                                      <ul class="cf_u">
+                                        <li>
+                                          <label for="inputPassword" class="col-sm-2 control-label">
+                                            <a class="minus_j" title="删除">－</a>
+                                            <a class="add_j" title="添加">+</a>驾照</label>
+                                          <div class="col-sm-10 mar_b_10">
+                                            <select class="form-control width_60 fl_l">
+                                              <option>宝马</option>
+                                              <option>奔弛</option>
+                                            </select>
+                                          </div>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </form>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                  <button type="button" class="btn btn-primary">保存</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <span class="fl_l add_term"><i class=" icon-icon_cancel"></i><input type="checkbox"> <i>一组人员</i></span>
+                          <div class="progress fl_r width_85">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                              1244
+                            </div>
+                          </div>
+                          <span class="width100 fl_l padd_l_20">
+                             <button class="btn btn-danger" data-toggle="modal" data-target="#myModal">条件一</button>
+                          </span>
+                        </li>
+                        <li>
+                          <span class="fl_l add_term"><i class=" icon-icon_cancel"></i><input type="checkbox"> <i>一组人员</i></span>
+                          <div class="progress fl_r width_85">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                              1244
+                            </div>
+                          </div>
+                          <span class="width100 fl_l padd_l_20">
+                             <button class="btn btn-danger" data-toggle="modal" data-target="#myModal">条件一</button>
+                          </span>
+                        </li>
+
+                      </ul>
+                      <!--交并集-->
+                      <ul class="right_shop_progress clearfix  jiaobing display_none ">
+                        <li> <i class="fl_l">交集统计</i>
+                          <div class="progress fl_r width_90">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
+                              1244
+                            </div>
+                          </div>
+                        </li>
+                        <li> <i class="fl_l">并集统计</i>
+                          <div class="progress fl_r width_90">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
+                              1244
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+
+              </div>
+            </div>
+            <!--重点库-->
+            <div class="col-md-12 right_shop">
+              <span class="right_shop_number"><i>重点库</i><a>242人</a></span>
+              <div  class="right_shop_infor" id="screen_2">
+                <span class="title">重点库分析</span>
+                <div class="right_shop_block  col-md-12 modu_list_block">
+                    <ul class="modu_list">
+                      <li>
+                        <a href="">123人</a>--A批次 <i class=" icon-location_searching"></i>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#myModal6">条件..</button>
+                        <!-- Modal -->
+                        <div class="modal fade disabled_input" id="myModal6"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content" id="model_2">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h5 class="modal-title blue_bj" >列表条件</h5>
+                              </div>
+                              <div class="modal-body">
+                                <form class="form-horizontal">
+                                  <div class="form-group">
+                                    <label class="col-sm-2 control-label">年龄</label>
+                                    <div class="col-sm-10">
+                                      <input type="text" class="form-control width_40 fl_l" placeholder="最小值">
+                                      <span class="fl_l">---</span>
+                                      <input type="text" class="form-control width_40 fl_l" placeholder="最大值">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="inputPassword" class="col-sm-2 control-label">  性别</label>
+                                    <div class="col-sm-10">
+                                      <select class="form-control">
+                                        <option>男</option>
+                                        <option>女</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="inputPassword" class="col-sm-2 control-label">  身高范围</label>
+                                    <div class="col-sm-10">
+                                      <select class="form-control width_60 fl_l">
+                                        <option>160cm</option>
+                                        <option>奔弛</option>
+                                      </select>
+
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="inputPassword" class="col-sm-2 control-label"> 籍贯地</label>
+                                    <div class="col-sm-10">
+                                      <input class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="inputPassword" class="col-sm-2 control-label">现住地</label>
+                                    <div class="col-sm-10">
+                                      <input class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="form-group c_f">
+                                    <ul class="cf_u">
+                                      <li>
+                                        <label for="inputPassword" class="col-sm-2 control-label">
+                                          车辆</label>
+                                        <div class="col-sm-10 mar_b_10">
+                                          <select class="form-control width_60 fl_l">
+                                            <option>宝马</option>
+                                            <option>奔弛</option>
+                                          </select>
+                                          <div class="form-group sele_bj fl_l">
+                                            <div class="sele_wapper">
+                                              <label for="inputPassword" class="col-sm-2 control-label">资金账号</label>
+                                              <div class="col-sm-10">
+                                                <input class="form-control width_60 fl_l">
+                                              </div>
+                                            </div>
+                                            <div class="sele_wapper">
+                                              <label for="inputPassword" class="col-sm-2 control-label">资金交易时间</label>
+                                              <div class="col-sm-10">
+                                                <select class="form-control width_40 fl_l">
+                                                  <option>宝马</option>
+                                                  <option>奔弛</option>
+                                                </select>
+                                                <span class="fl_l">---</span>
+                                                <select class="form-control width_40 fl_l">
+                                                  <option>宝马</option>
+                                                  <option>奔弛</option>
+                                                </select>
+                                              </div>
+                                            </div>
+                                            <div class="sele_wapper">
+                                              <label for="inputPassword" class="col-sm-2 control-label">交易次数</label>
+                                              <div class="col-sm-10">
+                                                <select class="form-control width_40 fl_l">
+                                                  <option>宝马</option>
+                                                  <option>奔弛</option>
+                                                </select>
+                                                <span class="fl_l">---</span>
+                                                <select class="form-control width_40 fl_l">
+                                                  <option>宝马</option>
+                                                  <option>奔弛</option>
+                                                </select>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                  <div class="form-group c_f">
+                                    <ul class="cf_u">
+                                      <li>
+                                        <label for="inputPassword" class="col-sm-2 control-label">驾照</label>
+                                        <div class="col-sm-10 mar_b_10">
+                                          <select class="form-control width_60 fl_l">
+                                            <option>宝马</option>
+                                            <option>奔弛</option>
+                                          </select>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </form>
+                              </div>
+
+                          </div>
+                            </div>
+                        </div>
+                      </li>
+                      <li><a href="">123人</a>--A批次 <i class=" icon-location_searching"></i> <button class="btn btn-danger" data-toggle="modal" data-target="#myModal6">条件..</button></li>
+                      <li><a href="">123人</a>--A批次 <i class=" icon-location_searching"></i> <button class="btn btn-danger" data-toggle="modal" data-target="#myModal6">条件..</button></li>
+                    </ul>
+
+                </div>
+
+              </div>
+            </div>
+            <!--侦查库-->
+            <div class="col-md-12 right_shop">
+              <span class="right_shop_number"><i>侦查库</i><a class="circle_number">242</a></span>
+              <div  class="right_shop_infor">
+                <span class="title">侦查库分析</span>
+                <div class="right_shop_block  col-md-12">
+                 <span class="icon_dao"><a href=""> 人员下发</a> <a href="">导出文件</a></span>
+                  <div class="pos_r  dao_img">
+                    <img src="assets/images/icon_dao.png">
+                    <a class="dao_circle dao_C1">12</a>
+                    <a class="dao_circle dao_C2">3</a>
+                    <a class="dao_circle dao_C3">3</a>
+                    <a class="dao_circle dao_C4">23</a>
+                    <a class="dao_circle dao_C5">5</a>
+                    <a class="dao_circle dao_C6">6</a>
+                    <a class="dao_circle dao_C7">8</a>
+                    <a class="dao_circle dao_C8">65</a>
+                    <a class="dao_circle dao_C9">3</a>
+                    <a class="dao_circle dao_C10">89</a>
+                    <a class="dao_circle dao_C11">12</a>
+                    <a class="dao_circle dao_C12">98</a>
+                    <a class="dao_circle dao_C13">45</a>
+                    <a class="dao_circle dao_C14">2</a>
+                    <a class="dao_circle dao_C15">8</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--弹出-->
+             <div class="filter_peron_list  display_none ">
+               <!--左侧-->
+               <div class="left">
+                 <p class="title"> 条件筛选人员</p>
+                 <ul>
+                   <li class="li_one"><i class="icon-icon_zoom-in  chart_text"></i>证件查询</li>
+                 </ul>
+                 <ul>
+                   <li id="l_1"><a class="icon-untitled30 chart_icon"></a><a class="chart_text"><i class="icon-icon_zoom-in"></i>年龄范围(岁)</a></li>
+                   <li id="l_2"><a class="icon-untitled30 chart_icon"></a><a class="chart_text"><i class="icon-icon_zoom-in"></i>身高范围(cm)</a></li>
+                   <li id="l_3"><a class="icon-untitled30 chart_icon"></a><a class="chart_text"><i class="icon-icon_zoom-in"></i>姓别</a></li>
+                   <li id="l_4"><a class="icon-untitled30 chart_icon"></a><a class="chart_text"><i class="icon-icon_zoom-in"></i>省籍贯地(省/市/县)</a></li>
+                   <li id="l_5"><a class="icon-untitled30 chart_icon"></a><a class="chart_text"><i class="icon-icon_zoom-in"></i>现住地(省/市/县)</a></li>
+                 </ul>
+                 <ul>
+                   <li class="li_one"><a class="chart_text"><i class="icon-icon_zoom-in"></i>联系方式</a></li>
+                   <li class="li_one" id="l_6"><a class="chart_text"><i class="icon-icon_zoom-in"></i>车辆</a></li>
+                  <!-- <li class="li_one" id="l_7"><a class="chart_text"><i class="icon-icon_zoom-in"></i>驾照</a></li>-->
+                   <li class="li_one" id="l_8"><a class="chart_text"><i class="icon-icon_zoom-in"></i>工作单位</a></li>
+                    <li class="li_one"><a class="chart_text"><i class="icon-icon_zoom-in"></i>入所</a></li>
+                     <li class="li_one"><a class="chart_text"><i class="icon-icon_zoom-in"></i>研判情况</a></li>
+                   <li id="l_9"><a class="icon-untitled30 chart_icon"></a><a class="chart_text"><i class="icon-icon_zoom-in"></i>行为</a></li>
+                   <li id="l_10"><a class="icon-untitled30 chart_icon"></a><a class="chart_text"><i class="icon-icon_zoom-in"></i>前科</a></li>
+                   <li id="l_11"><a class="icon-untitled30 chart_icon"></a><a class="chart_text"><i class="icon-icon_zoom-in"></i>标签</a></li>
+                 </ul>
+               </div>
+               <!--右侧-->
+               <div class="right pos_r">
+                 <p class="title">
+                   <input type="text" placeholder="一组条件" class="fl_l text-center width_80">
+                   <i class="icon-icon_cancel fl_r"></i>
+                 </p>
+                 <div class="chart" id="my_echarts"  style="width: 600px;height:400px;">
+
+                 </div>
+                 <div class="input_list display_none" id="input_list">
+                   <form class="form-horizontal ">
+                     <div class="form-group display_none form_1">
+                       <label class="col-sm-2 control-label"><a class="minus" title="删除">－</a>证件类型</label>
+                       <div class="col-sm-6">
+                         <select name="" class="form-control">
+                           <option value="">身份证</option>
+                           <option value="">护照</option>
+                           <option value="">港澳通行证</option>
+                           <option value="">台胞证</option>
+                           <option value="">其他</option>
+                         </select>
+                       </div>
+                       <div class="form-group display_none form_1">
+                       <label class="col-sm-2 control-label"><a class="minus" title="删除">－</a>证件号码</label>
+                       <div class="col-sm-10">
+                         <input class="form-control ">
+                       </div>
+                     </div>
+
+                     <div class="form-group display_none form_2">
+                       <label class="col-sm-2 control-label"><a class="minus" title="删除">－</a>年龄</label>
+                       <div class="col-sm-10">
+                         <input type="text" class="form-control width_40 fl_l" placeholder="最小值">
+                         <span class="fl_l">---</span>
+                         <input type="text" class="form-control width_40 fl_l" placeholder="最大值">
+                       </div>
+                     </div>
+                     <div class="form-group display_none form_3">
+                       <label for="inputPassword" class="col-sm-2 control-label"><a class="minus">－</a>   性别</label>
+                       <div class="col-sm-10">
+                         <select class="form-control">
+                           <option>男</option>
+                           <option>女</option>
+                         </select>
+                       </div>
+                     </div>
+                     <div class="form-group display_none form_4">
+                       <label for="inputPassword" class="col-sm-2 control-label"><a class="minus" title="删除">－</a>  身高范围</label>
+                       <div class="col-sm-10">
+                         <select class="form-control width_60 fl_l">
+                           <option>160cm</option>
+                           <option>奔弛</option>
+                         </select>
+                       </div>
+                     </div>
+                     <div class="form-group display_none form_5">
+                       <label for="inputPassword" class="col-sm-2 control-label"><a class="minus" title="删除">－</a> 籍贯地</label>
+                       <div class="col-sm-10">
+                         <input class="form-control">
+                       </div>
+                     </div>
+                     <div class="form-group display_none form_6">
+                       <label for="inputPassword" class="col-sm-2 control-label"><a class="minus" title="删除">－</a>现住地</label>
+                       <div class="col-sm-10">
+                         <input class="form-control">
+                       </div>
+                     </div>
+                     <div class='form-group'>
+                       <ul class="cf_u">
+                         <li>
+                           <label for="inputPassword" class="col-sm-2 control-label">
+                             <a class="minus_j" title="删除">－</a>
+                             <a class="add_j" title="添加">+</a>
+                             联系方式
+                           </label>
+                           <div class='col-sm-10 mar_b_10'>
+                             <select class="form-control width_60 fl_l">
+                               <option>手机号</option>
+                               <option>微信</option>
+                               <option>QQ</option>
+                             </select>
+                             <input type="text" class="form-control width_40 fl_l" placeholder="">
+                           </div>
+                         </li>
+                       </ul>
+                     </div>
+                     <div class="form-group c_f display_none form_7">
+                       <ul class="cf_u">
+                         <li>
+                           <label for="inputPassword" class="col-sm-2 control-label">
+                             <a class="minus_j" title="删除">－</a>
+                             <a class="add_j" title="添加">+</a>
+                             车辆</label>
+                           <div class="col-sm-10 mar_b_10">
+                             <select class="form-control width_60 fl_l">
+                               <option>机动车</option>
+                               <option>非机动车</option>
+                             </select>
+                             <a class="exp_text add_exp add_exp">[添加车辆具体筛选条件]</a>
+                             <div class="form-group sele_bj display_none">
+                               <div class="sele_wapper">
+                                 <label for="inputPassword" class="col-sm-2 control-label">资金账号</label>
+                                 <div class="col-sm-10">
+                                   <input class="form-control width_60 fl_l">
+                                 </div>
+                               </div>
+                               <div class="sele_wapper">
+                                 <label for="inputPassword" class="col-sm-2 control-label">资金交易时间</label>
+                                 <div class="col-sm-10">
+                                   <select class="form-control width_40 fl_l">
+                                     <option>宝马</option>
+                                     <option>奔弛</option>
+                                   </select>
+                                   <span class="fl_l">---</span>
+                                   <select class="form-control width_40 fl_l">
+                                     <option>宝马</option>
+                                     <option>奔弛</option>
+                                   </select>
+                                 </div>
+                               </div>
+                               <div class="sele_wapper">
+                                 <label for="inputPassword" class="col-sm-2 control-label">交易次数</label>
+                                 <div class="col-sm-10">
+                                   <select class="form-control width_40 fl_l">
+                                     <option>宝马</option>
+                                     <option>奔弛</option>
+                                   </select>
+                                   <span class="fl_l">---</span>
+                                   <select class="form-control width_40 fl_l">
+                                     <option>宝马</option>
+                                     <option>奔弛</option>
+                                   </select>
+                                 </div>
+                               </div>
+                             </div>
+                           </div>
+                         </li>
+                       </ul>
+                     </div>
+
+                     <div class="form-group c_f display_none form_9">
+                       <ul class="cf_u">
+                         <li>
+                           <label for="inputPassword" class="col-sm-2 control-label">
+                             <a class="minus_j" title="删除">－</a>
+                             <a class="add_j" title="添加">+</a> 单位名称</label>
+                           <div class="col-sm-10">
+                             <input class="form-control" style="width:50%;display:inline-block">
+                             <a class="exp_text add_exp">[添加单位筛选条件]</a>
+                             <div class="form-group sele_bj display_none">
+                               <div class="sele_wapper">
+                                 <label for="inputPassword" class="col-sm-2 control-label">资金账号</label>
+                                 <div class="col-sm-10">
+                                   <input class="form-control width_60 fl_l">
+                                 </div>
+                               </div>
+                               <div class="sele_wapper">
+                                 <label for="inputPassword" class="col-sm-2 control-label">资金交易时间</label>
+                                 <div class="col-sm-10">
+                                   <select class="form-control width_40 fl_l">
+                                     <option>宝马</option>
+                                     <option>奔弛</option>
+                                   </select>
+                                   <span class="fl_l">---</span>
+                                   <select class="form-control width_40 fl_l">
+                                     <option>宝马</option>
+                                     <option>奔弛</option>
+                                   </select>
+                                 </div>
+                               </div>
+                               <div class="sele_wapper">
+                                 <label for="inputPassword" class="col-sm-2 control-label">交易次数</label>
+                                 <div class="col-sm-10">
+                                   <select class="form-control width_40 fl_l">
+                                     <option>宝马</option>
+                                     <option>奔弛</option>
+                                   </select>
+                                   <span class="fl_l">---</span>
+                                   <select class="form-control width_40 fl_l">
+                                     <option>宝马</option>
+                                     <option>奔弛</option>
+                                   </select>
+                                 </div>
+                               </div>
+                             </div>
+                           </div>
+                         </li>
+                       </ul>
+                     </div>
+                       <!--入所-->
+                       <div class="form-group c_f display_none form_10">
+                         <ul class="cf_u">
+                           <li>
+                             <label for="inputPassword" class="col-sm-2 control-label">
+                               <a class="minus_j" title="删除">－</a>
+                               <a class="add_j" title="添加">+</a>入所</label>
+                             <div class="col-sm-10">
+                               <select class="form-control width_60 fl_l">
+                                 <option>入戒毒所</option>
+                                 <option>入拘留所</option>
+                                 <option>入看守所</option>
+                               </select>
+                               <a class="exp_text add_exp" >[添加入所具体筛选条件]</a>
+                               <div id="ban_ji" class="form-group sele_bj display_none">
+                                 <div class="sele_wapper">
+                                   <select class="form-control width_60 fl_l">
+                                     <option>有</option>
+                                     <option>无</option>
+                                   </select>
+                                 </div>
+                                 <div class="sele_wapper">
+                                   <label for="inputPassword" class="col-sm-2 control-label">监所名称</label>
+                                   <div class="col-sm-10">
+                                     <input class="form-control width_60 fl_l">
+                                   </div>
+                                 </div>
+                                 <div class="sele_wapper">
+                                   <label for="inputPassword" class="col-sm-2 control-label">班级</label>
+                                   <div class="col-sm-10">
+                                     <input class="form-control width_60 fl_l">
+                                   </div>
+                                 </div>
+                                 <div class="sele_wapper">
+                                   <label for="inputPassword" class="col-sm-2 control-label">入所日期</label>
+                                   <div class="col-sm-10">
+                                     <div class="form-control width_40 fl_l" class="id_put">
+                                       <input  type="date">
+                                     </div>
+                                     <span class="fl_l">---</span>
+                                     <div class="form-control width_40 fl_l" class="id_put1">
+                                       <input type="date">
+                                     </div>
+                                   </div>
+                                 </div>
+                                 <div class="sele_wapper">
+                                   <label for="inputPassword" class="col-sm-2 control-label">出所日期</label>
+                                   <div class="col-sm-10">
+                                     <div class="form-control width_40 fl_l" class="id_pp">
+                                       <input type="date">
+                                     </div>
+                                     <span class="fl_l">---</span>
+                                     <div class="form-control width_40 fl_l" class="id_p1">
+                                       <input type="date">
+                                     </div>
+                                   </div>
+                                 </div>
+                               </div>
+                               <div id='jian_hao' class="form-group sele_bj display_none">
+                                 <div class="sele_wapper">
+                                   <select class="form-control width_60 fl_l">
+                                     <option>有</option>
+                                     <option>无</option>
+                                   </select>
+                                 </div>
+                                 <div class="sele_wapper">
+                                   <label for="inputPassword" class="col-sm-2 control-label">监所名称</label>
+                                   <div class="col-sm-10">
+                                     <input class="form-control width_60 fl_l">
+                                   </div>
+                                 </div>
+                                 <div class="sele_wapper">
+                                   <label for="inputPassword" class="col-sm-2 control-label">监室号</label>
+                                   <div class="col-sm-10">
+                                     <input class="form-control width_60 fl_l">
+                                   </div>
+                                 </div>
+                                 <div class="sele_wapper">
+                                   <label for="inputPassword" class="col-sm-2 control-label">入所日期</label>
+                                   <div class="col-sm-10">
+                                     <div class="form-control width_40 fl_l" class="id_put">
+                                       <input  type="date">
+                                     </div>
+                                     <span class="fl_l">---</span>
+                                     <div class="form-control width_40 fl_l" class="id_put1">
+                                       <input type="date">
+                                     </div>
+                                   </div>
+                                 </div>
+                                 <div class="sele_wapper">
+                                   <label for="inputPassword" class="col-sm-2 control-label">出所日期</label>
+                                   <div class="col-sm-10">
+                                     <div class="form-control width_40 fl_l" class="id_pp">
+                                       <input type="date">
+                                     </div>
+                                     <span class="fl_l">---</span>
+                                     <div class="form-control width_40 fl_l" class="id_p1">
+                                       <input type="date">
+                                     </div>
+                                   </div>
+                                 </div>
+                               </div>
+                               <div id="jian_hao1" class="form-group sele_bj display_none">
+                                 <div class="sele_wapper">
+                                   <select class="form-control width_60 fl_l">
+                                     <option>有</option>
+                                     <option>无</option>
+                                   </select>
+                                 </div>
+                                 <div class="sele_wapper">
+                                   <label for="inputPassword" class="col-sm-2 control-label">监所名称</label>
+                                   <div class="col-sm-10">
+                                     <input class="form-control width_60 fl_l">
+                                   </div>
+                                 </div>
+                                 <div class="sele_wapper">
+                                   <label for="inputPassword" class="col-sm-2 control-label">监室号</label>
+                                   <div class="col-sm-10">
+                                     <input class="form-control width_60 fl_l">
+                                   </div>
+                                 </div>
+                                 <div class="sele_wapper">
+                                   <label for="inputPassword" class="col-sm-2 control-label">入所日期</label>
+                                   <div class="col-sm-10">
+                                     <div class="form-control width_40 fl_l" class="id_put">
+                                       <input  type="date">
+                                     </div>
+                                     <span class="fl_l">---</span>
+                                     <div class="form-control width_40 fl_l" class="id_put1">
+                                       <input type="date">
+                                     </div>
+                                   </div>
+                                 </div>
+                                 <div class="sele_wapper">
+                                   <label for="inputPassword" class="col-sm-2 control-label">出所日期</label>
+                                   <div class="col-sm-10">
+                                     <div class="form-control width_40 fl_l" class="id_pp">
+                                       <input type="date">
+                                     </div>
+                                     <span class="fl_l">---</span>
+                                     <div class="form-control width_40 fl_l" class="id_p1">
+                                       <input type="date">
+                                     </div>
+                                   </div>
+                                 </div>
+                               </div>
+
+                             </div>
+                           </li>
+                         </ul>
+                       </div>
+                       <div class="form-group c_f display_none form_12">
+                         <ul class="cf_u">
+                           <li>
+                             <label for="inputPassword" class="col-sm-2 control-label">
+                               <a class="minus_j" title="删除">－</a>
+                               <a class="add_j" title="添加">+</a> 研判情况
+                             </label>
+                             <div class="col-sm-10">
+                               是否研判
+                               <select class="form-control width_30 fl_l mar_r_15">
+                                 <option>是</option>
+                                 <option>否</option>
+                               </select>
+                               <select class="form-control width_30 fl_l mar_r_15">
+                                 是否抓获
+                                 <option>是</option>
+                                 <option>无</option>
+                               </select>
+                               <select class="form-control width_30 fl_l mar_r_15">
+                                 星档
+                                 <option>标签二</option>
+                                 <option>无</option>
+                               </select>
+                             </div>
+                           </li>
+                         </ul>
+                       </div>
+                       <!--下面是行为-->
+                     <div class="form-group c_f display_none form_10">
+                       <ul class="cf_u">
+                         <li>
+                           <label for="inputPassword" class="col-sm-2 control-label">
+                             <a class="minus_j" title="删除">－</a>
+                             <a class="add_j" title="添加">+</a>行为</label>
+                           <div class="col-sm-10">
+                             <select class="form-control width_60 fl_l">
+                               <option>网吧</option>
+                               <option>无</option>
+                             </select>
+                             <a class="exp_text add_exp">[添加车辆具体筛选条件]</a>
+                             <div class="form-group sele_bj display_none">
+                               <div class="sele_wapper">
+                                 <label for="inputPassword" class="col-sm-2 control-label">资金账号</label>
+                                 <div class="col-sm-10">
+                                   <input class="form-control width_60 fl_l">
+                                 </div>
+                               </div>
+                               <div class="sele_wapper">
+                                 <label for="inputPassword" class="col-sm-2 control-label">资金交易时间</label>
+                                 <div class="col-sm-10">
+                                   <select class="form-control width_40 fl_l">
+                                     <option>宝马</option>
+                                     <option>奔弛</option>
+                                   </select>
+                                   <span class="fl_l">---</span>
+                                   <select class="form-control width_40 fl_l">
+                                     <option>宝马</option>
+                                     <option>奔弛</option>
+                                   </select>
+                                 </div>
+                               </div>
+                               <div class="sele_wapper">
+                                 <label for="inputPassword" class="col-sm-2 control-label">交易次数</label>
+                                 <div class="col-sm-10">
+                                   <select class="form-control width_40 fl_l">
+                                     <option>宝马</option>
+                                     <option>奔弛</option>
+                                   </select>
+                                   <span class="fl_l">---</span>
+                                   <select class="form-control width_40 fl_l">
+                                     <option>宝马</option>
+                                     <option>奔弛</option>
+                                   </select>
+                                 </div>
+                               </div>
+                             </div>
+                           </div>
+                         </li>
+                       </ul>
+                     </div>
+                     <div class="form-group c_f display_none form_11">
+                       <ul class="cf_u">
+                         <li>
+                           <label for="inputPassword" class="col-sm-2 control-label">
+                             <a class="minus_j" title="删除">－</a>
+                             <a class="add_j" title="添加">+</a>前科</label>
+                           <div class="col-sm-10">
+                             <select class="form-control width_60 fl_l">
+                               <option>盗窃</option>
+                               <option>无</option>
+                             </select>
+                             <a class="exp_text add_exp">[添加车辆具体筛选条件]</a>
+                             <div class="form-group sele_bj display_none">
+                               <div class="sele_wapper">
+                                 <label for="inputPassword" class="col-sm-2 control-label">盗窃类型</label>
+                                 <div class="col-sm-10">
+                                   <select class="form-control width_60 fl_l">
+                                     <option>入室盗窃</option>
+                                     <option>入室抢劫</option>
+                                   </select>
+                                 </div>
+                               </div>
+                               <div class="sele_wapper">
+                                 <label for="inputPassword" class="col-sm-2 control-label">盗窃时间</label>
+                                 <div class="col-sm-10">
+                                   <div class="form-control width_40 fl_l" class="id_put1">
+                                     <input type="date">
+                                   </div>
+                                   <span class="fl_l">---</span>
+                                   <div class="form-control width_40 fl_l" class="id_put1">
+                                     <input type="date">
+                                   </div>
+                                 </div>
+                               </div>
+                               <div class="sele_wapper">
+                                 <label for="inputPassword" class="col-sm-2 control-label">盗窃次数</label>
+                                 <div class="col-sm-10">
+                                   <input type="text" class="form-control width_40 fl_l" placeholder="盗窃次数">
+                                   <span class="fl_l">---</span>
+                                   <input type="text" class="form-control width_40 fl_l" placeholder="盗窃次数">
+                                 </div>
+                               </div>
+                             </div>
+                           </div>
+                         </li>
+                       </ul>
+                     </div>
+                     <div class="form-group c_f display_none form_12">
+                       <ul class="cf_u">
+                         <li>
+                           <label for="inputPassword" class="col-sm-2 control-label">
+                             <a class="minus_j" title="删除">－</a>
+                             <a class="add_j" title="添加">+</a> 标签
+                           </label>
+                           <div class="col-sm-10">
+                             <select class="form-control width_30 fl_l mar_r_15">
+                               <option>标签一</option>
+                               <option>无</option>
+                             </select>
+                             <select class="form-control width_30 fl_l mar_r_15">
+                               <option>标签二</option>
+                               <option>无</option>
+                             </select>
+                           </div>
+                         </li>
+                       </ul>
+                     </div>
+                   </form>
+                 </div>
+                 <button class="btn btn-primary" ngclick="screen_ren()"> 确定筛选人员</button>
+               </div>
+
+               <!--list-->
+
+
+             </div>
+            <!--添加三级目录-->
+            <div class="setup_list  display_none ">
+              <div class="left" style='z-index: 20;'>
+                <div class="col-md-12">
+                  <h5> <i class="fl_l">新建组</i> <i class="icon-icon_cancel fl_r"></i></h5>
+                  <form class="form-horizontal" id="form-menu" name="form-menu" action="" method="post" enctype="multipart/form-data" target="_self">
+                    <div class="form-group ">
+                      <label class="col-sm-4 control-label">输入组名称</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control width_100" name="zu_ming" class="zu_ming1">
+                      </div>
+                    </div>
+                    <div class="form-group ">
+                      <label class="col-sm-4 control-label">犯罪类别</label>
+                      <div class="col-sm-8">
+                        <select class="form-control width_100"  class="lei_zui">
+                          <option>级犯罪类型1 </option>
+                          <option>级犯罪类型2 </option>
+                          <option>级犯罪类型3 </option>
+                        </select>
+                      </div>
+                      <label class="col-sm-4 control-label mar-top10">犯罪类别</label>
+                      <div class="col-sm-8 mar-top10">
+                        <select class="form-control width_100"  class="lei_zui1">
+                          <option>级犯罪类型4 </option>
+                          <option>级犯罪类型5</option>
+                          <option>级犯罪类型6</option>
+                        </select>
+                      </div>
+                    </div>
+                    <button class="btn-primary btn submit_setup" ng-click="add_jiao()">提交</button>
+                  </form>
+                </div>
+              </div>
+              <div class="right"></div>
+            </div>
+            <!--list-->
+       </section>
+    </div>
+   </dd>
+  </dl>
+</div>
+<!--setup start-->
+<div class="setup_block" style="display: none">
+  <h5>设置 <i class="icon-icon_delete fl_r"></i></h5>
+  <dl>
+    <!--<dt>主题换肤</dt>
+    <dd>
+      <input type="checkbox" id="skin"><label for="skin">浅色主调</label>
+      <input type="checkbox" id="skin_w"><label for="skin_w">深色主调</label>
+    </dd>-->
+    <dt>窗口设置</dt>
+    <dd>
+      <input type="checkbox" id="windows"><label for="windows">新窗口打开</label>
+    </dd>
+    <dt>节点标签是否显示姓名</dt>
+    <dd>
+      <input type="checkbox" id="shows"><label for="shows">显示</label>
+    </dd>
+    <dt><i class="icon-icon_image"></i>王二南</dt>
+    <dt><i class="icon-icon_log-out"></i>退出</dt>
+  </dl>
+
+</div>
+<!--setup end-->
+</body>
+</html>
+<!--引入angular文件-->
+<script src="assets/bower_components/angular/angular.min.js"></script>
+<!--引入app-screen文件-->
+<script src="assets/app/app-screen.js"></script>
+<!--引入控制器文件-->
+<!--todo-->
+<script src="assets/app/controllers/basicsCtrl.js"></script>
+<!--引入三级目录插件-->
+<script src="assets/app/js/jstreeAllCase2.js"></script>
+<!--引入ecahts的文件-->
+<script src="assets/app/js/tubiao.js"></script>
