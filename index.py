@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, Response
 import requests
 import test
 from business import gradeService
@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "index"
+    return render_template('index2.html')
 
 
 @app.route('/index')
@@ -48,26 +48,45 @@ def filter():
 
 
 @app.route("/grade")
-@app.route("/grade/<personId>")
+@app.route("/grade/<personId>", methods=['GET', 'POST'])
 def grade(personId=None):
     person = gradeService.getPerson(personId)
     p_score = gradeService.gradePerson(person)
     attr_weight = gradeService.attr_weight()
+    rel_persons = gradeService.get_rel_persons(personId)
     print(p_score)
     print(attr_weight)
 
-    score = p_score['genderScore'][0] * attr_weight['gender_weight'][0] + p_score['nationScore'][0] * attr_weight[
-        'nation_weight'][0] + p_score['ageScore']* attr_weight['age_weight'][0] + p_score['birthPlaceScore'][0] * attr_weight[
-        'birth_place_weight'][0] + p_score['edutationLevelScore'][0] * attr_weight[
-        'education_level_weight'][0] + p_score['statusOfMarryScore'][0] * attr_weight[
-        'status_marry_weight'][0] + p_score['titleScore'][0] * attr_weight[
-        'title_weight'][0] + p_score['accentScore'][0] * attr_weight['accent_weight'][0]
+    score = calc_individual_person_score(p_score, attr_weight)
 
-    print("person score = ",score)
+    for p in rel_persons:
+        rel_person_score = gradeService.gradePerson(p)
+        print("rel score = ", rel_person_score)
+        # rel_score = calc_individual_person_score(rel_person_score,attr_weight)
+        # print(" rel_score = ",rel_score)
+
+    print("person score = ", score)
     # d = dict(name='bob',age = 20,score=88)
 
     print(person.getJson())
-    return json.dumps(person.getJson())
+    response = Response(
+        response=json.dumps(person.getJson()),
+        mimetype="application/json",
+        status=200
+    )
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
+    # return jsonify(person.getJson())
+
+
+def calc_individual_person_score(p_score, attr_weight):
+    score = p_score['genderScore'] * attr_weight['gender_weight'] + p_score['nationScore'] * attr_weight[
+        'nation_weight'] + p_score['ageScore'] * attr_weight['age_weight'] + p_score['birthPlaceScore'] * attr_weight[
+        'birth_place_weight'] + p_score['edutationLevelScore'] * attr_weight[
+        'education_level_weight'] + p_score['statusOfMarryScore'] * attr_weight[
+        'status_marry_weight'] + p_score['titleScore'] * attr_weight[
+        'title_weight'] + p_score['accentScore'] * attr_weight['accent_weight']
+    return score
 
 
 if __name__ == '__main__':

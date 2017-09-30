@@ -58,7 +58,7 @@ def attrGrade(personInfo: person.Person):
     edutationLevelScore = getConcreteAttrGrade(personInfo.edutionLevel)
     statusOfMarryScore = getConcreteAttrGrade(personInfo.maritalStatus)
     titleScore = getConcreteAttrGrade(personInfo.title)
-    ageScore = getAgeAttrGrade(personInfo.age)
+    ageScore = getAgeAttrGrade(float(personInfo.age))
     accentScore = getConcreteAttrGrade(personInfo.accent)
     scoreDict = dict(genderScore=genderScore, nationScore=nationScore, accentScore=accentScore,ageScore=ageScore,
                      birthPlaceScore=birthPlaceScore, edutationLevelScore=edutationLevelScore,
@@ -93,7 +93,7 @@ def getConcreteAttrGrade(attr):
     # print("score = %d" %score)
     cursor.close()
     conn.close()
-    return score
+    return score[0]
 
 
 def getAgeAttrGrade(age):
@@ -107,11 +107,11 @@ def getAgeAttrGrade(age):
     ageScore = 0
     for i in range(size):
         ageRange = data.ix[i]['ageRange'].rstrip()
-        pos = ageRange.find('-')
+        #pos = ageRange.find('-')
 
-        if pos == 0:
-            ageRange = ageRange[1:len(ageRange)]
-        arrAge = ageRange.split('-')
+        # if pos == 0:
+        #     ageRange = ageRange[1:len(ageRange)]
+        arrAge = ageRange.split(':')
         startAge = 0.0
         endAge = 0.0
         try:
@@ -139,7 +139,7 @@ def get_concrete_attr_weight(attr):
     # print("score = %d" %res)
     cursor.close()
     conn.close()
-    return score
+    return score[0]
 
 
 def getConnect():

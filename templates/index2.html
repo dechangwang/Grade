@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="UserInfoModule">
+<head>
+    <meta charset="UTF-8">
+    <title>人员积分</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='assets/bower_components/bootstrap/dist/css/bootstrap.css')}}">
+</head>
+<body ng-controller="UserinfoController">
+   
+    <div class="form-group">
+        <label class="col-md-2 control-label">身份证号码：</label>
+            <div class="col-md-10"><input type="text" class="form-control" ng-model="personId" placeholder="请输入身份证号码">
+             </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="确  &nbsp;   认" ng-click="search_person()">
+        </div>
+    </div>
+<!--{{url_for('static',filename='assets/javascripts/jquery-1.9.0.min.js')}}-->
+<script type="text/javascript" src="{{url_for('static',filename='assets/bower_components/angular/angular.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/index.js')}}"></script>
+</body>
+</html>
